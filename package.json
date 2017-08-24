@@ -14,7 +14,7 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "express-mustache": "^1.0.3",
+    "express-validator": "^3.2.1",
     "mongoose": "^4.10.8",
     "morgan": "^1.8.2",
     "mustache": "^2.3.0",

@@ -1,24 +1,30 @@
 const express = require('express');
-const Book = require('../models/book');
-const router = express.Router();
+const Book    = require('../models/book');
+const router  = express.Router();
 
 
 router.get('/', function(req, res) {
 
-    Book.create({
-        title: "Little Women",
-        author: "Louisa May Alcott",
-        pageCount: 472,
+  Book.find({})
+  .then(function(books) {
+    res.render('listing', {bookData: books});
+  })
+});
 
-        publishing: [
-            {
-                year: 1868,
-                publisher: "Roberts Brothers",
-                city:'Boston'
-            },
+router.post('/', function(req, res) {
 
-        ],
-    })
+  let newBook = {
+    title: req.body.title,
+    author: req.body.author,
+    pageCount: req.body.page,
+    publishing: {
+      year: req.body.year,
+      publisher: req.body.publisher,
+      city: req.body.city
+    }
+  }
+
+    Book.create(newBook)
     .then(function(data){
         console.log(data);
     })
@@ -26,8 +32,29 @@ router.get('/', function(req, res) {
         console.log(err);
     })
 
-  // console.log(book.toObject());
-  res.render('listing')
+    res.redirect('/');
+  })
+
+
+
+
+
+router.post('/delete', function(req, res) {
+  let title = req.params.title;
+
+  Book.deleteOne({title: title})
+  .then(function (data) {
+    console.log(data);
+    res.redirect('/')
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
+});
+
+router.post('/:id', function (req, res) {
+  let id = req.params.id;
+  res.redirect('/');
 })
 
 

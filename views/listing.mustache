@@ -1,1 +1,26 @@
-<h1>Book Collection</h1>
+
+<form class="" action="/" method="post">
+  <input type="text" name="title" placeholder="Title">
+  <input type="text" name="author" placeholder="Author">
+  <input type="number" maxlength="6" name="page" placeholder="Page Count">
+  <input type="number" maxlength="4" name="year" placeholder="Year Published">
+  <input type="text" name="publisher" placeholder="Publisher">
+  <input type="text" name="city" placeholder="City of Publishing">
+  <input type="submit" name="button">
+</form>
+
+{{#bookData}}
+<hr>
+<ul>
+  <li>"{{title}}"</li>
+  <li> written by: {{author}}</li>
+</ul>
+
+<form class="" action="/delete" method="post">
+  <button type="button" name="deleteButton" value="{{title}}">Delete Book</button>
+
+<form class="" action="/edit" method="post">
+  <button type="button" name="editButton">Edit Book</button>
+</form>
+
+{{/bookData}}
