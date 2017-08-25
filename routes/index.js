@@ -22,35 +22,76 @@ router.post('/', function(req, res) {
       publisher: req.body.publisher,
       city: req.body.city
     }
-  }
+  };
 
     Book.create(newBook)
     .then(function(data){
-        console.log(data);
+      res.redirect('/');
+        // console.log(data);
     })
     .catch(function(err){
-        console.log(err);
+        // console.log(err);
     })
-
-    res.redirect('/');
+    // res.redirect('/');
   })
-
-
-
 
 
 router.post('/delete', function(req, res) {
-  let title = req.params.title;
+
+  let title = req.body.deleteBtn;
+  // console.log(title);
 
   Book.deleteOne({title: title})
   .then(function (data) {
-    console.log(data);
     res.redirect('/')
   })
-  .catch(function (err) {
-    console.log(err);
-  });
+  console.log(title);
+  // .catch(function(err) {
+  //   // console.log(err);
+  // });
 });
+// 
+//
+// router.get('/edit/:title', function(req, res){
+//   let title = req.params.name;
+//   Book.find({name: name})
+//   .then(function(book){
+//     res.render('edit', {bookData: book})
+//   })
+// });
+//
+// router.post('/edit/:title', function(req, res) {
+//
+//   let newBook = {
+//     title: req.body.title,
+//     author: req.body.author,
+//     pageCount: req.body.page,
+//     publishing: {
+//       year: req.body.year,
+//       publisher: req.body.publisher,
+//       city: req.body.city
+//     }
+//   };
+//
+//   let title = req.params.title
+//
+//   Book.update({title: title}, {
+//       title: req.body.title,
+//       author: req.body.author,
+//       pageCount: req.body.page,
+//       publishing: {
+//         year: req.body.year,
+//         publisher: req.body.publisher,
+//         city: req.body.city
+//       }
+//     }).then(function(data) {
+//       res.redirect('/');
+//     })
+// })
+
+
+
+
 
 router.post('/:id', function (req, res) {
   let id = req.params.id;
