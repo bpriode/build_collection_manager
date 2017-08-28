@@ -36,67 +36,61 @@ router.post('/', function(req, res) {
   })
 
 
-router.post('/delete', function(req, res) {
+router.post('/delete/:id', function(req, res) {
 
-  let title = req.body.deleteBtn;
+  let id = req.body.deleteBtn;
   // console.log(title);
 
-  Book.deleteOne({title: title})
+  Book.deleteOne({_id: id})
   .then(function (data) {
     res.redirect('/')
   })
-  console.log(title);
-  // .catch(function(err) {
-  //   // console.log(err);
-  // });
+  .catch(function(err) {
+    res.send(err);
+  });
 });
-// 
 //
-// router.get('/edit/:title', function(req, res){
-//   let title = req.params.name;
-//   Book.find({name: name})
-//   .then(function(book){
-//     res.render('edit', {bookData: book})
-//   })
-// });
 //
-// router.post('/edit/:title', function(req, res) {
-//
-//   let newBook = {
-//     title: req.body.title,
-//     author: req.body.author,
-//     pageCount: req.body.page,
-//     publishing: {
-//       year: req.body.year,
-//       publisher: req.body.publisher,
-//       city: req.body.city
-//     }
-//   };
-//
-//   let title = req.params.title
-//
-//   Book.update({title: title}, {
-//       title: req.body.title,
-//       author: req.body.author,
-//       pageCount: req.body.page,
-//       publishing: {
-//         year: req.body.year,
-//         publisher: req.body.publisher,
-//         city: req.body.city
-//       }
-//     }).then(function(data) {
-//       res.redirect('/');
-//     })
-// })
+router.get('/edit/:id', function(req, res){
+  let editId = req.params.id;
+  let bookEdit = data.find(function(book) {
+    return book.id = editId;
+  })
+  // Book.find({name: name})
+  // .then(function(book){
+    res.render('edit', {bookData: bookEdit})
+  });
+
+router.post('/edit/:id', function(req, res) {
+
+  let editId = req.params.id;
 
 
-
-
-
-router.post('/:id', function (req, res) {
-  let id = req.params.id;
-  res.redirect('/');
+  Book.update({_id: userEdit}, {
+      title: req.body.title,
+      author: req.body.author,
+      pageCount: req.body.page,
+      publishing: {
+        year: req.body.year,
+        publisher: req.body.publisher,
+        city: req.body.city
+      }
+    }).then(function(data) {
+      res.redirect('/');
+    })
+    .catch(function(err) {
+      res.send(err);
+    })
 })
+
+
+
+
+
+// router.post('/:id', function (req, res) {
+//   let id = req.params.id;
+//   res.redirect('/');
+// })
 
 
 

@@ -1,4 +1,7 @@
 
+<div class="results">
+
+
 <form id="addItem" action="/" method="post">
   <input type="text" name="title" placeholder="Title">
   <input type="text" name="author" placeholder="Author">
@@ -15,12 +18,14 @@
   <li> written by: {{author}}</li>
 </ul>
 
-<form class="" action="/delete/" method="post">
-  <button type="button" name="deleteBtn" value="{{id}}">Delete Book</button>
+<form class="" action="/delete/{{id}}" method="post">
+  <button type="submit" name="deleteBtn" value="{{id}}">Delete Book</button>
 </form>
 
-<form class="" action="/edit/:id" method="post">
-  <button type="button" name="editButton" href='/edit/{{title}}'>Edit Book</a></button>
+<form class="" action="/edit{{id}}" method="post">
+  <button type="button" name="editButton">Edit Book</a></button>
 </form>
 
 {{/bookData}}
+
+</div>
